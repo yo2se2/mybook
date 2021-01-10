@@ -75,9 +75,14 @@ class BooksController < ApplicationController
             @avg_rate = 0
         end
 
+        #効率悪い・・・
+        #commentsのrateのnilを0に変換
+        @comments.select("rate").each do |c|
+            if c.nil?
+                c = 0
+            end
+        end            
         @comments = @book.comments.all.page(params[:page]).per(10)
-       
-
     end
 
     def edit
@@ -87,7 +92,7 @@ class BooksController < ApplicationController
     def update
         book = Book.find(params[:id])
         if book.update(book_params)
-          redirect_to :action => "show", :id => book.id
+          redirect_to :action => "favorite"
         else
           redirect_to :action => "new"
         end
