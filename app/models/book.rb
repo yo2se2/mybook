@@ -7,9 +7,6 @@ class Book < ApplicationRecord
     has_many :likes, dependent: :destroy
     has_many :liked_users, through: :likes, source: :user
 
-    validates :name, presence: true
-    validates :body,presence: true
-
     def liked?(like_user_id,like_food_id)
         likes.where(user_id: like_user_id, book_id: like_book_id).exists?
     end

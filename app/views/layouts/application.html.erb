@@ -7,11 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
+    <!-- bootstrapでページネーションのデザイン-->
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Kameron:wght@400;700&family=Noto+Sans+JP&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
+    <%= stylesheet_link_tag "/assets/modules/Avariables"%>
+    <!--コード追加 Bootstrap JavaScript読み込みコード -->
 
     <!-- 遼太郎さんの-->
     <script type="text/javascript">
@@ -21,7 +26,7 @@
  
   </head>
     
-<body>
+<body class="<%= controller_name -%> <%= action_name -%>">
   <div id="global-container">
     <div id="container">   
         <div id="content">
@@ -31,13 +36,14 @@
             <header class="header">
                 <div class="header__inner">
                     <div class="logo">
+                        <%= link_to "", books_path ,class: "home-logo"%>
                         <img src="">
                         <span class="logo__my">My</span>
                         <span class="logo__Book">Book</span>
                     </div>
                     <nav class="header__nav">
                         <ul class="header__ul">
-                            <li class="header__li"><%= link_to 'Home', books_path %></li>
+                            <li class="header__li"><%= link_to 'Post', books_path %></li>
                         <% if user_signed_in? %>  
                             <li class="header__li"><%= link_to 'Mypage' , user_path(current_user.id) %></li>
                             <li class="header__li"><%= link_to 'logout' , destroy_user_session_path, method: :delete %></li>
@@ -92,4 +98,5 @@
 <%= javascript_pack_tag 'libs/scroll'%>
 <%= javascript_pack_tag 'libs/text-animation'%>
 <%= javascript_pack_tag 'libs/mobile-menu'%>
+<%= javascript_pack_tag 'libs/comment'%>
 </html>
